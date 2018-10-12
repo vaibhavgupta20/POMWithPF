@@ -33,10 +33,12 @@ public class LoginTest extends BaseTest {
 		LaunchPage LaunchP = new LaunchPage(driver, test);
 		PageFactory.initElements(driver, LaunchP);
 		LaunchP.navigate(Constants.WEBSITE_PROD_URL);
-		LaunchP.doLogin("barath89", "qwerty12");
-		test.log(LogStatus.PASS, "Test Passed");
 
-//		reportFailure("test case failed");
+		String uName = data.get("username");
+		String password = data.get("password");
+
+		LaunchP.doLogin(uName, password);
+		test.log(LogStatus.PASS, "Test Passed");
 
 	}
 

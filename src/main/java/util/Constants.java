@@ -2,7 +2,7 @@ package util;
 
 public class Constants {
 
-	public static String WEBSITE_PROD_URL = "https://sports.ladbrokes.com/en-gb/";
+	public static String WEBSITE_PROD_URL = "https://www.facebook.com";
 
 	// config
 	public static String REPORTS_PATH = System.getProperty("user.dir") + "\\Reports\\";
@@ -14,7 +14,10 @@ public class Constants {
 	public static String TESTCASENAME_XLS = "TestCaseName";
 
 	// xpaths
-	public static final String USERNAME_XPATH = ".//*[@id='username']";
-	public static final String PASSWORD_XPATH = ".//*[@id='password']";
+	public static final String USERNAME_XPATH = "//*[@id=\"email\"]";
+	public static final String PASSWORD_XPATH = "//*[@id=\"pass\"]";
 
+	public static final String PROFILE_XPATH = "//*[@data-click='profile_icon']/a";
+	
+	
 }
