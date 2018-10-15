@@ -64,23 +64,16 @@ public class DataUtil {
 	}
 
 	public static boolean isTestExecutable(Xls_Reader xls, String testCaseName) {
-
 		int rows = xls.getRowCount(Constants.TESTCASE_XLS_SHEET);
-
 		for (int rNum = 2; rNum <= rows; rNum++) {
-
 			String testName = xls.getCellData(Constants.TESTCASE_XLS_SHEET, Constants.TESTCASENAME_XLS, rNum);
-
 			if (testName.equals(testCaseName)) {
 				String runMode = xls.getCellData(Constants.TESTCASE_XLS_SHEET, Constants.RUNMODE_XLS, rNum);
-
 				if (runMode.equals("Y")) {
 					return true;
 				} else
 					return false;
-
 			}
-
 		}
 		return false;
 	}

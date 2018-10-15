@@ -13,15 +13,16 @@ import com.relevantcodes.extentreports.LogStatus;
 import base.BaseTest;
 import pages.LandingPage;
 import pages.LaunchPage;
+import pages.ProfilePage;
 import util.Constants;
 import util.DataUtil;
 
-public class LoginTest extends BaseTest {
+public class ProfileTest extends BaseTest {
 
-	String testCaseName = "LoginTest";
+	String testCaseName = "ProfileTest";
 
 	@Test(dataProvider = "getData")
-	public void doLogin(Hashtable<String, String> data) {
+	public void openProfile(Hashtable<String, String> data) {
 		test = extent.startTest(testCaseName);
 
 		if (!DataUtil.isTestExecutable(xls, testCaseName) || data.get(Constants.RUNMODE_XLS).equals("N")) {
@@ -38,8 +39,13 @@ public class LoginTest extends BaseTest {
 		String uName = data.get("username");
 		String password = data.get("password");
 
-		LaunchP.doLogin(uName, password);
+		LandingPage landingP = LaunchP.doLogin(uName, password);
 
+		ProfilePage profileP = landingP.gotoProfilePage();
+
+		profileP.verifyProfile();
+		
+		
 		test.log(LogStatus.PASS, "Test Passed");
 
 	}
@@ -50,7 +56,7 @@ public class LoginTest extends BaseTest {
 		extent.endTest(test);
 		extent.flush();
 
-//		driver.quit();
+		driver.quit();
 
 	}
 

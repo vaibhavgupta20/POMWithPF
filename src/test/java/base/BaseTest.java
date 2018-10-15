@@ -10,6 +10,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.Assert;
 
@@ -32,8 +33,10 @@ public class BaseTest {
 
 		switch (browserType) {
 		case "chrome":
+			ChromeOptions ops = new ChromeOptions();
+			ops.addArguments("--disable-notifications");
 			System.setProperty("webdriver.chrome.driver", Constants.CHROMEDRIVER_EXE);
-			driver = new ChromeDriver();
+			driver = new ChromeDriver(ops);
 			break;
 		case "ie":
 			System.setProperty("webdriver.ie.driver", "binaries/ie.exe");
@@ -47,16 +50,13 @@ public class BaseTest {
 
 	}
 
-	
-	public void reportFailure(String failureMessage){
-		
+	public void reportFailure(String failureMessage) {
+
 		test.log(LogStatus.FAIL, failureMessage);
 		takeScreenShot();
 		Assert.fail(failureMessage);
 	}
-	
-	
-	
+
 	public void takeScreenShot() {
 		Date d = new Date();
 		String screenshotFile = d.toString().replace(":", "_").replace(" ", "_") + ".png";

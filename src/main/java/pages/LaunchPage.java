@@ -5,6 +5,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 import com.relevantcodes.extentreports.ExtentTest;
@@ -30,7 +31,7 @@ public class LaunchPage extends BasePage {
 		driver.get(website);
 	}
 
-	public void doLogin(String userName, String password1) {
+	public LandingPage doLogin(String userName, String password1) {
 
 		uName.sendKeys(userName);
 		password.sendKeys(password1 + Keys.RETURN);
@@ -40,11 +41,16 @@ public class LaunchPage extends BasePage {
 		if (result) {
 			//login success
 			test.log(LogStatus.INFO, "Login Successful");
+			LandingPage landingPage = new LandingPage(driver, test);
+			PageFactory.initElements(driver, landingPage);
+			return landingPage;
+			
+			
 		}else {
 			//login failed
 			reportFailure("Login Unsuccessful");
+			return null;
 		}
-		
 		
 	}
 
